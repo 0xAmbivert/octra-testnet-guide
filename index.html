@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Octra Testnet Wallet Creation and Installation Guide</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Octra Testnet Wallet Creation and Installation Guide</h1>
+    </header>
+
+    <main>
+        <section id="introduction">
+            <h2>Introduction to Octra Testnet</h2>
+            <p>This guide will walk you through the process of installing and setting up your Octra Testnet Wallet client. The Octra project focuses on DePIN and Fully Homomorphic Encryption (FHE) sectors. Participating in the testnet is a great way to earn potential future rewards.</p>
+            <p>The primary method covered here will be using the official Octra GitHub repository and its `wallet-gen` client, which utilizes `bun` and GitHub Codespaces.</p>
+        </section>
+
+        <section id="prerequisites">
+            <h2>Prerequisites</h2>
+            <ul>
+                <li>A GitHub account.</li>
+                <li>A modern web browser.</li>
+                <li>(Optional, but recommended for Codespaces): Familiarity with basic terminal commands.</li>
+            </ul>
+        </section>
+
+        <section id="installation-codespace">
+            <h2>Step 1 of Guide: GitHub Codespace Installation (Recommended)</h2>
+            <p>This is the easiest way to get started as it provides a pre-configured environment in your browser.</p>
+            <h3>Step 1: Fork the Octra Wallet Generator Repository</h3>
+            <ol>
+                <li>Go to the official Octra wallet-gen GitHub repository: <a href="https://github.com/octra-labs/wallet-gen" target="_blank">GitHub Repository of Octra-Wallet-Gen</a></li>
+                <li>Click the **"Fork"** button in the top right corner.</li>
+                <li>Click **"Create fork"**. This will create a copy of the repository under your GitHub account.</li>
+            </ol>
+
+            <h3>Step 2: Create a Codespace</h3>
+            <ol>
+                <li>After forking, you'll be on your copy of the repository. Click the green **"Code"** button.</li>
+                <li>Select the **"Codespaces"** tab.</li>
+                <li>Click **"Create codespace on main"**. This will take a few moments to set up your cloud development environment.</li>
+            </ol>
+
+            <h3>Step 3: Install Bun and Run the Wallet Generator</h3>
+                <p>Once the Codespace loads, you'll see a terminal at the bottom of your screen. First, you need to install Bun, and then you can proceed with the wallet generator commands. Enter the following commands one by one, pressing Enter after each:</p>
+                <pre><code>curl -fsSL https://bun.sh/install | bash
+source ~/.bashrc
+bun --version
+bun install
+bun run build
+bun run start
+</code></pre>
+                <p><strong>Explanation of commands:</strong></p>
+                <ul>
+                    <li><code>curl -fsSL https://bun.sh/install | bash</code>: Downloads and installs the Bun runtime.</li>
+                    <li><code>source ~/.bashrc</code>: Ensures your shell environment is correctly loaded and picks up Bun's path.</li>
+                    <li><code>bun --version</code>: Checks if Bun (a fast JavaScript runtime) is installed and displays its version.</li>
+                    <li><code>bun install</code>: Installs the project dependencies.</li>
+                    <li><code>bun run build</code>: Builds the wallet generator application.</li>
+                    <li><code>bun run start</code>: Starts the wallet generator server.</li>
+                </ul>
+<h3>Step 4: Generate Your Wallet</h3>
+            <p>After `bun start` runs, you should see a notification in the bottom right corner of your Codespace (or a link in the terminal output) indicating that a port is being forwarded. Click on it to open the wallet generation web UI in a new browser tab.</p>
+            <ol>
+                <li>In the new tab, click **"Generate Wallet"**.</li>
+                <li>**IMPORTANT:** Carefully save all the generated information: your Private Key, Public Key, and Mnemonic phrase. Store them securely offline (e.g., in a password manager, encrypted file, or written down in a safe place). **Do not share these with anyone!**</li>
+            </ol>
+        </section>
+
+        <section id="client-installation">
+        <h2>Step 2 of Guide: Octra CLI Client Installation</h2>
+        <p>This section guides you through installing and configuring the Octra CLI client, which allows you to interact with the Octra testnet, view your balance, and send transactions directly from your terminal.</p>
+        <h3>Prerequisites for CLI Client:</h3>
+        <ul>
+            <li>Python 3.8 or higher installed.</li>
+            <li>Your generated Octra Private Key and Wallet Address from the previous steps.</li>
+            <li>An active internet connection.</li>
+        </ul>
+
+        <h3>Step 1: Clone the Octra Pre-Client Repository</h3>
+        <p>Open your terminal (or Git Bash on Windows) and run the following commands:</p>
+        <pre><code>git clone https://github.com/octra-labs/octra_pre_client.git
+            cd octra_pre_client
+</code></pre>
+
+            <h3>Step 2: Set Up Python Environment and Install Dependencies</h3>
+            <h4>For Linux / macOS:</h4>
+            <p>Use the following commands to create a virtual environment and install the necessary Python packages:</p>
+            <pre><code>python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+</code></pre>
+            <h4>For Windows (Command Prompt/PowerShell):</h4>
+            <p>Use these commands to set up the virtual environment and install dependencies. Make sure you are in the `octra_pre_client` directory:</p>
+            <pre><code>python -m venv venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
+</code></pre>
+
+            <h3>Step 3: Configure Your Wallet</h3>
+            <p>The client needs your wallet details to operate. You will edit a configuration file.</p>
+            <ol>
+                <li>Copy the example wallet configuration:
+                    <pre><code>cp wallet.json.example wallet.json</code></pre>
+                    (On Windows, you might use `copy wallet.json.example wallet.json` if `cp` is not available directly)
+                </li>
+                <li>Open the newly created `wallet.json` file in a text editor (like VS Code or Notepad).</li>
+                <li>**Carefully replace the placeholder values** with your actual Private Key and Octra Wallet Address generated earlier.
+                    <pre><code>// Example of wallet.json content
+{
+    "private_key": "YOUR_PRIVATE_KEY_HERE_IN_B64_FORMAT",
+    "address": "YOUR_OCTRA_ADDRESS_HERE_STARTING_WITH_OCT"
+}
+                    </code></pre>
+                    **Important:** Ensure your Private Key is in the correct B64 (Base64) format if the client expects it this way. Do not include any extra spaces or characters.
+                </li>
+                <li>Save and close the `wallet.json` file.</li>
+            </ol>
+
+            <h3>Step 4: Run the Octra CLI Client</h3>
+            <p>Ensure your Python virtual environment is activated (from Step 2). Then, run the client:</p>
+            <h4>For Linux / macOS:</h4>
+            <pre><code>./run.sh
+</code></pre>
+            <h4>For Windows:</h4>
+            <pre><code>run.bat
+</code></pre>
+            <p>The CLI client should now launch in your terminal, providing a text-based interface to interact with the Octra Testnet.</p>
+        </section>
+
+        <section id="faucet-tokens">
+            <h2>Claiming Testnet Tokens (Faucet)</h2>
+            <p>Once you have your wallet address, you'll need testnet tokens to interact with the network.</p>
+            <ol>
+                <li>Go to the Octra Faucet page : <a href="https://faucet.octra.network/" target="_blank">Octra Faucet Here</a></li>
+                <li>Paste your generated Octra wallet address into the provided field.</li>
+                <li>Click "Claim Test Tokens (OCT)".</li>
+                <li>You should receive test tokens in your wallet shortly. Bookmark the faucet page as you might need to claim more tokens later.</li>
+            </ol>
+        </section>
+
+        <section id="next-steps">
+            <h2>Next Steps</h2>
+            <ul>
+                <li>Join the official Octra Discord server to stay updated and find other users for testing: <a href="https://discord.gg/WUghrsuywU" target="_blank">Join Discord</a></li>
+                <li>Participate in community discussions and test activities to potentially earn more airdrop points.</li>
+                <li>Keep an eye on Octra's official announcements for further testnet phases or client updates.</li>
+                <li>Consider contributing to the Octra project by reporting bugs or providing feedback on your testnet experience.</li>
+                <li>Consider Following <a href="https://x.com/0xAmbivert/" target="_blank">0xAmbivert</a> on X/Twitter for More Content Like that and Join Our <a href="https://t.me/Web3Rituals" target="_blank">Telegram</a> too </li>    
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 -- Made By Web3 Ambivert With Help of My Friend Gemini -- </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
