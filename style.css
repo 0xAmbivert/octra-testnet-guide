@@ -75,3 +75,71 @@ footer {
     color: #aaa; /* Lighter gray for footer text */
     font-size: 0.9em;
 }
+/* Header Styling for Web3 Rituals */
+header {
+    position: relative; /* Needed for absolute positioning of header-right */
+    overflow: hidden; /* Clear floats if any, or contain absolute elements */
+}
+
+/* Header Styling for Web3 Rituals - Updated for Fixed Position relative to Viewport */
+.header-right {
+    position: fixed; /* THIS IS THE KEY CHANGE: fixed to viewport */
+    top: 20px; /* Distance from the top of the browser window */
+    left: 20px; /* Distance from the left of the browser window */
+    color: #FFD700; /* Bright gold/yellow color */
+    font-size: 1.8em; /* Made it bigger */
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    z-index: 1000; /* Ensure it stays on top of other content */
+}
+header {
+    /* Remove position: relative; if it's here and causing issues for fixed elements */
+    /* If you still need it for h1 positioning within header, keep it, but ensure no conflict */
+    overflow: hidden;
+    text-align: center; /* To center the h1 */
+    padding: 20px; /* Some padding for the header content */
+    background-color: #007bff; /* Blue background for the main header box */
+    color: #fff;
+}
+
+/* Connect & Support Section Styling */
+#connect-support {
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 30px;
+    background-color: #2a2a2a; /* Slightly lighter dark background */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+}
+
+#connect-support h2 {
+    color: #00d4ff; /* Match your link color or another accent */
+    margin-bottom: 15px;
+}
+
+#connect-support p {
+    margin-bottom: 25px;
+    color: #ddd;
+}
+
+.social-links a {
+    display: inline-block;
+    background-color: #0056b3; /* Octra blue for buttons */
+    color: #fff;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.social-links a:hover {
+    background-color: #007bff; /* Lighter blue on hover */
+    text-decoration: none;
+}
+header h1 {
+    color: #fff; /* Explicitly set the H1 color to white */
+    margin: 0; /* Remove default margin to prevent extra space */
+    padding: 0; /* Remove default padding */
+}
